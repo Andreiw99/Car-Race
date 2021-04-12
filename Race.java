@@ -3,18 +3,21 @@ public class Race {
 
     public static void main(String[] args) {
 
-    	int noCars=100;
+    	int noCars=2;
     	Car cars[] = new Car[noCars];
         String name = "car";
         int speed= 0;
-        int circuit = 500;
+        int topSpeed = 4;
+        int circuit = 5;
         String winner="default car";
         int ok=0;
+        int previousSpeed = 0;
        
         Circuit circuits[]= new Circuit[noCars] ;
         for (int i = 0; i < noCars; i ++) {
-        	cars[i] = new Car(name);
-        	cars[i].setSpeed(speed);
+        	cars[i] = new Car(name, topSpeed);
+        	cars[i].setCurrentSpeed(speed);
+        	cars[i].setTopSpeed(topSpeed);
         	cars[i].setName(name+i);
         	circuits[i] = new Circuit();
         	circuits[i].setLenght(circuit);
@@ -26,8 +29,10 @@ public class Race {
 	        for(int i =0;i < noCars; i++)
 	        {
 	        	 cars[i].accelerate();
-	             System.out.println("Masina " + cars[i].getName() + " are viteza "+ cars[i].getSpeed());
-	             circuits[i].setLenght(circuit - cars[i].getSpeed());
+	             System.out.println("Masina " + cars[i].getName() + " are viteza "+ cars[i].getCurrentSpeed());
+	             circuits[i].setLenght(circuit - (cars[i].getCurrentSpeed() + previousSpeed));
+	             previousSpeed = cars[i].getCurrentSpeed();
+	             circuits[i].getLenght();
 	             if (circuits[i].getLenght() <= 0)
 	             {
 	 	        	winner = cars[i].getName();
