@@ -53,7 +53,7 @@ public class Car extends Thread {
 	    		if(circuit.getLenght() <= 0)
 	    		{
 	    			Race.gameOver = 1;
-	    			System.out.println(this.getCarName() + " a cistigat ");	
+	    			System.out.println(this.getCarName() + " won the race! ");	
 	    		}
 	    	}
 	    	
