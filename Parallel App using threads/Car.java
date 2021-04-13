@@ -39,11 +39,18 @@ public class Car extends Thread {
 	    
 	    public void run()
 	    {
+	    	Circuit circuit = new Circuit();
+	    	int circuitLenght = 100;
+	    	circuit.setLenght(circuitLenght);
+	    	int previousSpeed = 0;
+	    	
 	    	while (Race.gameOver == 0)
 	    	{
 	    		this.accelerate();
-	    		Race.circuit = Race.circuit - this.getCurrentSpeed();
-	    		if(Race.circuit < 0)
+	    		circuit.setLenght(circuitLenght - (this.getCurrentSpeed() + previousSpeed)); 
+	    		previousSpeed = this.getCurrentSpeed();
+	    		circuitLenght = circuitLenght - (this.getCurrentSpeed() + previousSpeed);
+	    		if(circuit.getLenght() <= 0)
 	    		{
 	    			Race.gameOver = 1;
 	    			System.out.println(this.getCarName() + " a cistigat ");	
