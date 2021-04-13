@@ -1,9 +1,12 @@
+import java.util.Random;
+
 public class Race extends Thread {
-    static int noCars=100;
-    Car cars[] = new Car[noCars];
+	static int noCars=100;
+	Car cars[] = new Car[noCars];
+	static Random rand = new Random();
     static String name = "car";
     static int speed= 0;
-    static int topSpeed = 100;
+    static int topSpeed = rand.nextInt(100);
     int ok=0;
     static volatile int gameOver = 0;
     
