@@ -1,0 +1,112 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class NascarGUI {
+
+	
+	private JFrame frame;
+	static JTextField lenght;
+	static JTextField no_cars;
+	private JLabel lblWinner;
+	private JLabel lblTime;
+	private JLabel lblNewLabel_4;
+	private static long timeElapsed;
+	private static String txtTimeElapsed;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NascarGUI window = new NascarGUI();
+					window.frame.setVisible(true);
+					Race race = new Race();
+					long startTime = System.nanoTime();
+					race.start();
+					long endTime = System.nanoTime();
+					timeElapsed = (endTime - startTime);
+					txtTimeElapsed = String.valueOf(timeElapsed);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public NascarGUI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnNewButton = new JButton("Start");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblWinner.setText(Car.getWinner());
+				lblTime.setText(txtTimeElapsed);
+				lblNewLabel_4.setText("nanoseconds");
+			}
+		});
+		btnNewButton.setBounds(289, 52, 89, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("Circuit's lenght");
+		lblNewLabel.setBounds(45, 39, 118, 23);
+		frame.getContentPane().add(lblNewLabel);
+		
+		lenght = new JTextField();
+		lenght.setText("1000");
+		lenght.setBounds(173, 40, 86, 20);
+		frame.getContentPane().add(lenght);
+		lenght.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Number of cars");
+		lblNewLabel_1.setBounds(45, 75, 118, 14);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		no_cars = new JTextField();
+		no_cars.setText("1000");
+		no_cars.setBounds(173, 72, 86, 20);
+		frame.getContentPane().add(no_cars);
+		no_cars.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("1st Place");
+		lblNewLabel_2.setBounds(135, 144, 60, 20);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		lblWinner = new JLabel("");
+		lblWinner.setBounds(205, 144, 69, 17);
+		frame.getContentPane().add(lblWinner);
+		
+		JLabel lblNewLabel_3 = new JLabel("Execution Time:");
+		lblNewLabel_3.setBounds(10, 225, 95, 14);
+		frame.getContentPane().add(lblNewLabel_3);
+		
+		lblTime = new JLabel("");
+		lblTime.setBounds(102, 225, 46, 14);
+		frame.getContentPane().add(lblTime);
+		
+	    lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setBounds(155, 225, 86, 14);
+		frame.getContentPane().add(lblNewLabel_4);
+	}
+}
