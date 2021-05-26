@@ -16,7 +16,7 @@ public class NascarGUI {
 	private JLabel lblWinner;
 	private JLabel lblTime;
 	private JLabel lblNewLabel_4;
-	private static long timeElapsed;
+	private static double timeElapsed;
 	private static String txtTimeElapsed;
 
 	/**
@@ -29,11 +29,11 @@ public class NascarGUI {
 					NascarGUI window = new NascarGUI();
 					window.frame.setVisible(true);
 					Race race = new Race();
-					long startTime = System.nanoTime();
+					double startTime = System.nanoTime();
 					race.start();
-					long endTime = System.nanoTime();
-					timeElapsed = (endTime - startTime);
-					txtTimeElapsed = String.valueOf(timeElapsed);
+					double endTime = System.nanoTime();
+					timeElapsed = (endTime - startTime) / 1000000;
+					txtTimeElapsed = String.valueOf(String.format("%.5f", timeElapsed));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,7 +63,7 @@ public class NascarGUI {
 			public void actionPerformed(ActionEvent e) {
 				lblWinner.setText(Car.getWinner());
 				lblTime.setText(txtTimeElapsed);
-				lblNewLabel_4.setText("nanoseconds");
+				lblNewLabel_4.setText("seconds");
 			}
 		});
 		btnNewButton.setBounds(289, 52, 89, 23);
